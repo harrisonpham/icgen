@@ -25,7 +25,7 @@ $processed .= "// input:        " . realpath($FLAGS['input']) . "\n";
 $processed .= "// input sha256: " . hash_file('sha256', $FLAGS['input']) . "\n";
 $processed .= "// output:       " . realpath($FLAGS['output']) . "\n";
 $processed .= "// ran at:       " . date('c') . "\n";
-$processed .= "// icgen ver:    " . shell_exec('cd ' . realpath(dirname(__FILE__)) . ' && git describe --always --dirty') . "\n";
+$processed .= "// icgen ver:    " . trim(shell_exec('cd ' . realpath(dirname(__FILE__)) . ' && git describe --always --dirty')) . "\n";
 $processed .= "//\n";
 $processed .= "// AUTO GENERATED - DO NOT MODIFY THIS FILE\n\n";
 
