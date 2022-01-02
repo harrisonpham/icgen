@@ -3,13 +3,14 @@
 
 include('common.php');
 
-$FLAGS = getopt('', array('input:', 'output:', 'help'));
+$FLAGS = getopt('', array('input:', 'output:', 'comment:', 'help'));
 
 if (array_key_exists('help', $FLAGS)) {
     echo <<<EOD
     icgen file preprocessor.
         --input - Input file to preprocess.
         --output - Output file.
+        --comment - Comment prefix.
 
     EOD;
     exit(0);
@@ -27,6 +28,10 @@ $processed .= "// ran at:       " . date('c') . "\n";
 $processed .= "// icgen ver:    " . shell_exec('cd ' . realpath(dirname(__FILE__)) . ' && git describe --always --dirty') . "\n";
 $processed .= "//\n";
 $processed .= "// AUTO GENERATED - DO NOT MODIFY THIS FILE\n\n";
+
+if (array_key_exists('comment', $FLAGS)) {
+    $processed = str_replace('//', $FLAGS['comment'], $processed);
+}
 
 ob_implicit_flush(false);
 ob_start();
